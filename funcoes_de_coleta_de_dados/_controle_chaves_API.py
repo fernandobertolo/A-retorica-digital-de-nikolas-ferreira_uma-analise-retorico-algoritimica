@@ -8,16 +8,16 @@ load_dotenv()
 
 # Dicionário com as chaves de API
 dict_api_keys = {
-    "key_joao": os.getenv("key_joao"),
+    "key_joao": os.getenv("KEY_JOAO"),
     "key_camisa": os.getenv("KEY_CAMISA"),
-    "key_bertolo": os.getenv("key_camisa"),
-    "key_nathalia": os.getenv("key_nathalia"),
-    "key_sandra": os.getenv("key_sandra"),
-    "key_sandra2": os.getenv("key_sandra2"),
-    "key_xaxin": os.getenv("key_xaxin"),
-    "key_iaemail961": os.getenv("key_iaemail961"),
-    "key_amadeus": os.getenv("key_amadeus"),
-    "key_esther": os.getenv("key_esther")
+    "key_bertolo": os.getenv("KEY_BERTOLO"),
+    "key_nathalia": os.getenv("KEY_NATHALIA"),
+    "key_sandra": os.getenv("KEY_SANDRA"),
+    "key_sandra2": os.getenv("KEY_SANDRA2"),
+    "key_xaxin": os.getenv("KEY_XAXIN"),
+    "key_iaemail961": os.getenv("KEY_IAEMAIL961"),
+    "key_amadeus": os.getenv("KEY_AMADEUS"),
+    "key_esther": os.getenv("KEY_ESTHER")
 }
 
 
@@ -72,7 +72,6 @@ def chave_api():
         try:
             youtube = build("youtube", "v3", developerKey=chave)
             print(f"Sucesso com a chave: {nome_chave}")
-            logger.debug(f"Sucesso com a chave: {nome_chave}")
 
             pula_para_proxima_chave()
             return youtube
@@ -81,3 +80,9 @@ def chave_api():
             pula_para_proxima_chave()
 
     raise RuntimeError("❗ Nenhuma chave API conseguiu criar o serviço da API do YouTube.")
+
+
+teste = chave_api()
+
+print(teste)
+
