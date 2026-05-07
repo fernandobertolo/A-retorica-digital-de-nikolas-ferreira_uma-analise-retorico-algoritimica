@@ -1,0 +1,16 @@
+# Ambientes Virtuais
+venv/
+.venv/
+env/
+
+# Cache do Python
+__pycache__/
+*.pyc
+
+# Arquivos de sistema e IDEs
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+/funcoes_de_coleta_de_dados/.env
+/testes.ipynb
