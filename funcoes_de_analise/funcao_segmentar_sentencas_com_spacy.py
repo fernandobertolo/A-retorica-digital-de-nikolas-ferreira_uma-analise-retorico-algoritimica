@@ -3,6 +3,7 @@ import spacy
 # Carregamento do modelo
 nlp = spacy.load("pt_core_news_sm")
 
+
 def segmentar_sentencas(texto):
     """
     Recebe uma string e retorna uma lista de sentenças utilizando o motor do spaCy.
@@ -12,10 +13,6 @@ def segmentar_sentencas(texto):
     doc = nlp(texto)
     return [sent.text.strip() for sent in doc.sents]
 
-# Exemplo de uso
-texto_exemplo = "O Dr. Nikolas discursou na Avenida Paulista. O evento ocorreu em março de 2024!"
-resultado = segmentar_sentencas(texto_exemplo)
-print(resultado)
 
 def segmentar_sentencas_em_lote(lista_de_textos):
     sentencas_totais = []

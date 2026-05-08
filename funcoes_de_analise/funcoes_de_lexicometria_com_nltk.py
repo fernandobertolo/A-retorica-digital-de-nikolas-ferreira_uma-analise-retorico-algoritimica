@@ -1,12 +1,9 @@
 # Conjunto de funções básicas / abre arquivo, faz o loglikelihood, calibra o corpus loglikelihood
 import nltk, os, math
+from nltk import tokenize
 from nltk.tokenize import word_tokenize
-from stop_words import stop_words
 
-stop_words_pt = stop_words()
-
-
-
+# Funções acessórias
 def itera_ou_abre_arquivos(caminho_corpus):
     """
     Verifica se o caminho fornecidos leva a um txt, ou a diretório
@@ -41,9 +38,8 @@ def itera_ou_abre_arquivos(caminho_corpus):
         except OSError as e:
             print(f"Erro ao acessar o diretório {caminho_corpus}: {e}")
     corpora = " ".join(corpora)
-    print(f"Nº Caracteres corpora: {caminho_corpus} - {len(corpora)}")
+    print(f"Nº Caracteres corpora: {caminho_corpus} - \n{len(corpora)}")
     return corpora
-
 
 def string_to_freqdist(corpus):
     """ Transforma uma string em um objeto frqFist
@@ -73,7 +69,6 @@ def string_to_freqdist(corpus):
 
     return corpus_freqdist
 
-
 def log_likelihood(oc, og, n, ng):
     """ Retorna um inteiro com o valor do loglikelihood
 
@@ -96,7 +91,6 @@ def log_likelihood(oc, og, n, ng):
     likelihood = 2 * (oc * math.log(oc / oe) + (n - oc) * (math.log((n - oc) / (n - oe))))
 
     return likelihood
-
 
 def corpus_calibrado_log_likelihood(c_especifico_freqDist, c_geral_freqDist, limiar, stopwords=["a", "e", "i", "o", "u", ",", "?", "!"]):
     """ Entram dois corpora com freq e dist e sai um corpus com freq dist já calibrado
@@ -122,8 +116,9 @@ def corpus_calibrado_log_likelihood(c_especifico_freqDist, c_geral_freqDist, lim
     c_especifico_calibrado = nltk.FreqDist(c_especifico_calibrado)
     return c_especifico_calibrado
 
+# Função principal
 # Função que egloba todas as funções da anterior. Entra uma string e retorna uma objeto freqDist (calibrado).
-def lista_de_mais_frequentes_calibrada(caminho_corpus_especifico, caminho_corpus_geral, limiar, raw = True, stopwords=stop_words_pt):
+def lista_de_mais_frequentes_calibrada(caminho_corpus_especifico, caminho_corpus_geral, limiar, raw = True, stopwords=["a", "e", "i", "o", "u", ",", "?", "!"]):
     """
         Abre duas str com o local dos corpora, sejam arquivos ou diretórios
         processa e devolve um arquivo FreqDist já com as palavras que estão acima do limiar retiradas.
@@ -159,13 +154,11 @@ def lista_de_mais_frequentes_calibrada(caminho_corpus_especifico, caminho_corpus
     # Carrega o corpus específico (string ou arquivo)
     if raw:
         corpus_especifico = itera_ou_abre_arquivos(caminho_corpus_especifico)
-
     else:
         corpus_especifico = caminho_corpus_especifico
-    print(f'Tamanho do corpus específico: {len(corpus_especifico)}')
+
     # Sempre carrega o corpus geral a partir de arquivo(s)
     corpus_geral = itera_ou_abre_arquivos(caminho_corpus_geral)
-    print(f'Tamanho do corpus geral: {len(corpus_geral)}')
 
     # String to freqdist
     c_especifico_tokenizado = string_to_freqdist(corpus_especifico)
@@ -173,6 +166,4 @@ def lista_de_mais_frequentes_calibrada(caminho_corpus_especifico, caminho_corpus
 
     # Chama a função corpus freqdist calibrado
     corpus_calibrado = corpus_calibrado_log_likelihood(c_especifico_tokenizado, c_geral_tokenizado, limiar, stopwords)
-    corpus_calibrado = corpus_calibrado_log_likelihood(c_especifico_tokenizado, c_geral_tokenizado, limiar, stopwords)
     return corpus_calibrado
-
