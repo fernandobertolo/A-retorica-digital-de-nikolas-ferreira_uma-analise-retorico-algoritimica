@@ -1,8 +1,10 @@
 # 1 - CAPTURA CANAIS
 # Conjunto de funções que tem o objtivo de baixar dados de canais do youtube
 import datetime
-from _controle_chaves_API import chave_api
+from funcoes_de_coleta_de_dados._controle_chaves_API import chave_api
 from googleapiclient.errors import HttpError
+
+
 
 def coleta_canais_por_handle(handle, maxResults=1, ordenador="relevance"):
     """

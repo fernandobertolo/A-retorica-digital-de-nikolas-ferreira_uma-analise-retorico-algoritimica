@@ -1,4 +1,4 @@
-from stop_words import stop_words
+from funcoes_de_analise.stop_words import stop_words
 import random, csv, datetime
 from nltk.collocations import BigramCollocationFinder
 from nltk.tokenize import word_tokenize

@@ -12,5 +12,5 @@ __pycache__/
 .idea/
 Thumbs.db
 .DS_Store
-/funcoes_de_coleta_de_dados/.env
+/.env
 /testes.ipynb
