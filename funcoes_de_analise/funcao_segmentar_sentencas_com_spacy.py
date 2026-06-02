@@ -10,6 +10,7 @@ def segmentar_sentencas(texto):
     """
     # Desabilita componentes desnecessários para aumentar a velocidade (NER, Parser complexo)
     # Mantém apenas o 'senter' (Sentence Recognizer) se disponível ou o parser básico.
+
     doc = nlp(texto)
     return [sent.text.strip() for sent in doc.sents]
 

@@ -1,0 +1,24 @@
+[alceste]
+type = alceste
+lem = 1
+mincl = 0
+nbforme_uce = 0
+max_actives = 20000
+tailleuc1 = 12
+nbcl = 4
+tailleuc2 = 14
+classif_mode = 1
+minforme = 2
+expressions = 1
+nbcl_p1 = 10
+svdmethod = irlba
+mode.patate = 0
+corpus = 4c60c514-8bd5-4b47-a12d-e9a2e1b62496
+pathout = C:\Users\bertolo\tese_nikolas_ferreira\transcricoes_nikolas_ianmute6_corpus_1\transcricoes_nikolas_ianmute6_alceste_1
+uuid = e22bee1b-1089-4c16-900d-d837c5d6812f
+name = transcricoes_nikolas_ianmute6_alceste_1
+eff_min_forme = 3
+nbactives = 8313
+clnb = 4
+time = 0h 3m 45s
+ira = C:\Users\bertolo\tese_nikolas_ferreira\transcricoes_nikolas_ianmute6_corpus_1\transcricoes_nikolas_ianmute6_alceste_1\Analyse.ira

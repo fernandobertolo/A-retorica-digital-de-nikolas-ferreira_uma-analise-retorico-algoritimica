@@ -1,0 +1,21 @@
+
++-+-+-+-+-+-+-+-+
+|i|R|a|M|u|T|e|Q| - Tue May 26 20:44:36 2026
++-+-+-+-+-+-+-+-+
+
+
+Número de textos: 451
+Número de ST: 25903
+Número de formas: 33657
+Número de ocorrências: 1035023
+Número de lemas: 20689
+Número de formas ativas: 19896
+Número de formas suplementares: 775
+Número de formas ativas com a frequência >= 3: 8313
+Média das formas por segmento: 39.957650
+Número de classes : 4
+24956 Segmentos classificados em  25903 (96.34%)
+
+###########################
+tempo : 0h 3m 45s
+###########################
