@@ -122,7 +122,7 @@ def gera_lista_de_mais_frequentes(lista_textos,
     total_absoluto_exibido = 0
 
     # 5. RENDERIZAÇÃO DA TABELA (I/O)
-    print(f"\n{'Nº':<4} {'Termo':<17} {'Absoluta':<12} {'Relativa (%)':<12}")
+    print(f"\n{'Nº':<3} {'Termo':<13} {'Absoluta':9} {'Relativa (%)':<9}")
     print("-" * 50)
 
     for i, (termo, contagem) in enumerate(mais_frequentes, 1):
@@ -135,7 +135,7 @@ def gera_lista_de_mais_frequentes(lista_textos,
         freq_acumulada += freq_relativa
         total_absoluto_exibido += contagem
 
-        print(f"{i:<4} {termo:<17} {contagem:<12} {freq_relativa:<12}")
+        print(f"{i:<3} {termo:<13} {contagem:<9} {freq_relativa:<9}")
 
     print("-" * 50)
     print(f"{'Total (Amostra)':<22} {total_absoluto_exibido:<12} {round(freq_acumulada, 2):<12}")
