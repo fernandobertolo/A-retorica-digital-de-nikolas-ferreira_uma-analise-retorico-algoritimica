@@ -1,0 +1,1 @@
+e_CCONJ apta_ADJ a_SCONJ usar_VERB branco_NOUN e_CCONJ o_DET homem_NOUN Ele_PRON estamos_AUX aqui_ADV ó_ADP [_PUNCT Música_PROPN ]_PUNCT

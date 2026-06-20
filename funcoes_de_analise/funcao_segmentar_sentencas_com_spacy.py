@@ -1,7 +1,7 @@
 import spacy
 
 # Carregamento do modelo
-nlp = spacy.load("pt_core_news_sm")
+nlp = spacy.load("pt_core_news_lg")
 
 
 def segmentar_sentencas(texto):
