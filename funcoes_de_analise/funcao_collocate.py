@@ -129,7 +129,7 @@ def extrair_collocates_antconc(
         f_node = freq_alvos[nodulo]
         f_col = freq_global_corpus[colocado]
 
-        # Cálculo de Mutual Information (Effect Size)
+        # Cálculo de Mutual Information (PMI Size)
         effect = 0.0
         if f_node > 0 and f_col > 0 and f_LR > 0:
             effect = math.log2((f_LR * tamanho_total_corpus) / (f_node * f_col))
@@ -174,7 +174,7 @@ def extrair_collocates_antconc(
 
     # Inserção do índice de Rank e exibição na saída padrão
     print(
-        f"\n{'Rank':<5} | {'Nódulo':<15} | {'Colocado':<15} | {'FreqLR':<8} | {'FreqL':<7} | {'FreqR':<7} | {'Range':<6} | {'Likelihood':<10} | {'Effect':<8}")
+        f"\n{'Rank':<5} | {'Nódulo':<15} | {'Colocado':<15} | {'FreqLR':<8} | {'FreqL':<7} | {'FreqR':<7} | {'Range':<6} | {'Likelihood':<10} | {'PMI':<8}")
     print("-" * 95)
 
     for indice, res in enumerate(resultados):

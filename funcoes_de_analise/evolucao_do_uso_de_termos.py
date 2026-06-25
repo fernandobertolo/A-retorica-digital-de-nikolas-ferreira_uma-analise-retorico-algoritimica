@@ -277,7 +277,10 @@ def evolucao_do_uso_de_termos_barras(lista_de_listas_termos,
                     hoverinfo='skip'
                 ))
 
-    fig.update_layout(hovermode="x unified")
+    fig.update_layout(
+        hovermode="x unified",
+        legend=dict(orientation="h", yanchor="top", y=-0.1, xanchor="center", x=0.5, font=dict(size=16))
+    )
     fig.write_html("evolucao_termos_clusters.html", include_plotlyjs="cdn")
 
     return fig
