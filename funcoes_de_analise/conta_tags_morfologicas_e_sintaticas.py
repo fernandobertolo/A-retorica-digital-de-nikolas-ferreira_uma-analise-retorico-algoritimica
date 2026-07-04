@@ -7,7 +7,7 @@ except OSError:
     raise OSError("Modelo linguístico não encontrado. Execute: python -m spacy download pt_core_news_sm")
 
 
-def conta_tags_morfologicas_e_sintaticas(termo, lista_de_setencas, lemma=True):
+def conta_tags_morfologicas_e_sintaticas(termo, lista_de_setencas, lemma=True, verbose=True):
     """
     Essa função conta quantas vezes e quais papeis sintáticos e morfológicos
     um termo exerce em uma lista de setencas.
@@ -16,11 +16,8 @@ def conta_tags_morfologicas_e_sintaticas(termo, lista_de_setencas, lemma=True):
     2 - Caso encontre, a função usar o parse da biblioteca Spacy para atribuir tags sintáticas e semânticas ao termo alvo
     3 - A função salva as informações em um dicionário.
         - A chave do dicionario é composta pelo nome duas tags. Exemplo: NOUN | obj
-        - O valor da chave é composto por uma tupla. O primeiro valor da tupla é um int com númeto de vezes que
-        o termo aparece com a tags da chave. E seguno valor da tupla é uma lista com as orações onde o termo aparece
-        com as tagas da chave.
-    4 - A função retora o dicionáio e também um print com uma tabela mostrando a contagem (primeiro valore da tupla), a chave,
-    e a primeira frase (primero item do dicionário que é o segunda entrada da tupla)
+        - O valor depende do parâmetro `verbose` (ver abaixo).
+    4 - A função retorna o dicionário e também imprime uma tabela com a contagem por tag.
 
     :argumentos:
 
@@ -28,9 +25,14 @@ def conta_tags_morfologicas_e_sintaticas(termo, lista_de_setencas, lemma=True):
     lista_de_setencas(list): lista de setencas
     lemma(bool): Define se a busca deve considerar tanto o termo alvo como os termos das sentenças em
     sua versão lematizada (lexema).
+    verbose(bool): Se True (padrão), imprime a sentença de exemplo na tabela e inclui a
+    lista de orações no retorno (valor = (contagem, [orações])). Se False, não imprime
+    a sentença de exemplo nem guarda as orações no retorno (valor = contagem, apenas o int),
+    o que também economiza memória.
 
     :returns
-    dic{str:(int,list[str]}:
+    Se verbose=True:  dict{str: (int, list[str])}  ->  {tag: (contagem, [orações])}
+    Se verbose=False: dict{str: int}               ->  {tag: contagem}
     """
 
     # Processamento do termo alvo
@@ -59,27 +61,35 @@ def conta_tags_morfologicas_e_sintaticas(termo, lista_de_setencas, lemma=True):
 
                 # Inicialização da chave no dicionário, caso não exista
                 if chave not in resultados:
-                    resultados[chave] = (0, [])
+                    resultados[chave] = [0, []]
 
-                # Atualização da contagem e da lista de orações
-                contagem, lista_sents = resultados[chave]
-                lista_sents.append(doc.text)
-                resultados[chave] = (contagem + 1, lista_sents)
+                # Atualização da contagem e (se verbose) da lista de orações
+                resultados[chave][0] += 1
+                if verbose:
+                    resultados[chave][1].append(doc.text)
 
     print("\n")  # Quebra de linha após a conclusão da barra de progresso
-
-    # Impressão da tabela
-    print(f"{'Contagem':<10} | {'Tag (POS | DEP)':<20} | {'Primeira Sentença'}")
-    print("-" * 80)
 
     # Ordenação decrescente pelo número de ocorrências (contagem)
     resultados_ordenados = sorted(resultados.items(), key=lambda item: item[1][0], reverse=True)
 
-    for chave, (contagem, lista_sents) in resultados_ordenados:
-        primeira_sentenca = lista_sents[0] if lista_sents else ""
-        print(f"{contagem:<10} | {chave:<20} | {primeira_sentenca.strip()}")
+    # Impressão da tabela (com a sentença de exemplo apenas se verbose=True)
+    if verbose:
+        print(f"{'Contagem':<10} | {'Tag (POS | DEP)':<20} | {'Primeira Sentença'}")
+        print("-" * 80)
+        for chave, (contagem, lista_sents) in resultados_ordenados:
+            primeira_sentenca = lista_sents[0] if lista_sents else ""
+            print(f"{contagem:<10} | {chave:<20} | {primeira_sentenca.strip()}")
+    else:
+        print(f"{'Contagem':<10} | {'Tag (POS | DEP)':<20}")
+        print("-" * 35)
+        for chave, (contagem, _lista) in resultados_ordenados:
+            print(f"{contagem:<10} | {chave:<20}")
 
-    return resultados
+    # Retorno: com as orações se verbose=True, apenas a contagem se verbose=False
+    if verbose:
+        return {chave: (contagem, lista_sents) for chave, (contagem, lista_sents) in resultados.items()}
+    return {chave: contagem for chave, (contagem, _lista) in resultados.items()}
 
 # Exemplo de uso:
 # sentencas = ["O estado forte garante os direitos.", "Sem o estado, não há garantias.", "Ele foi processado pelo estado."]
